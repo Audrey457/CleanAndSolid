@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{8F9B3228-9EC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanAndSolid.Domain", "CleanAndSolid.Domain\CleanAndSolid.Domain.csproj", "{F6A11261-5C2F-4AE4-9CC0-CBE8FA2F1EC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanAndSolid.Application", "CleanAndSolid.Application\CleanAndSolid.Application.csproj", "{FB222A74-1AF8-41F1-A744-CE062AF46F18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F6A11261-5C2F-4AE4-9CC0-CBE8FA2F1EC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6A11261-5C2F-4AE4-9CC0-CBE8FA2F1EC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6A11261-5C2F-4AE4-9CC0-CBE8FA2F1EC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB222A74-1AF8-41F1-A744-CE062AF46F18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB222A74-1AF8-41F1-A744-CE062AF46F18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB222A74-1AF8-41F1-A744-CE062AF46F18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB222A74-1AF8-41F1-A744-CE062AF46F18}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{B6BCF299-4512-4130-B8F5-33AC1AD2F0DE} = {2BA47BC3-6420-4D23-9FA0-1E90974E8C98}
 		{8F9B3228-9EC9-4505-9FB1-F5A430196CD0} = {2BA47BC3-6420-4D23-9FA0-1E90974E8C98}
 		{F6A11261-5C2F-4AE4-9CC0-CBE8FA2F1EC0} = {083C08D2-8BCB-4A3F-B82D-5DEB355DDF69}
+		{FB222A74-1AF8-41F1-A744-CE062AF46F18} = {083C08D2-8BCB-4A3F-B82D-5DEB355DDF69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F6EBD20C-77E6-4ECA-9F54-AC90307C926E}
