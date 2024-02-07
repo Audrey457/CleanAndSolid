@@ -1,4 +1,5 @@
 ﻿using CleanAndSolid.Domain.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace CleanAndSolid.Domain
 {

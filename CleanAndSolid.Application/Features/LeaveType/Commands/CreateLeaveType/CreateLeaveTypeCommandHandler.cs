@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanAndSolid.Application.Contracts.Persistance;
+using CleanAndSolid.Application.Exceptions;
 using MediatR;
 
 namespace CleanAndSolid.Application.Features.LeaveType.Commands.CreateLeaveType
@@ -17,6 +18,10 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.CreateLeaveType
         public async Task<int> Handle(CreateLeaveTypeCommand request, CancellationToken cancellationToken)
         {
             //Valider les données entrantes
+            var validator = new CreateLeaveTypeCommandValidator(leaveTypeRepository);
+            var validationResult = await validator.ValidateAsync(request);
+            if (validationResult.Errors.Any())
+                throw new BadRequestException("Invalid LeaveType", validationResult);
 
             //Convertir vers l'entity domain
             var leaveTypeToCreate = mapper.Map<Domain.LeaveType>(request);

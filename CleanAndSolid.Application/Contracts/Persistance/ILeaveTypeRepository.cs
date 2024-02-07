@@ -4,6 +4,7 @@ namespace CleanAndSolid.Application.Contracts.Persistance
 {
     public interface ILeaveTypeRepository : IGenericRepository<LeaveType>
     {
-
+        Task<bool> IsLeaveTypeUnique(string name);
+        Task<bool> Exists(string name);
     }
 }
