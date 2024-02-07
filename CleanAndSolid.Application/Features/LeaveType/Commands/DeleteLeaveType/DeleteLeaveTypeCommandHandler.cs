@@ -1,4 +1,5 @@
 ﻿using CleanAndSolid.Application.Contracts.Persistance;
+using CleanAndSolid.Application.Exceptions;
 using MediatR;
 
 namespace CleanAndSolid.Application.Features.LeaveType.Commands.DeleteLeaveType
@@ -14,6 +15,11 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.DeleteLeaveType
             var leaveTypeToDelete = await leaveTypeRepository.GetByIdAsync(request.Id);
             
             //Vérifier que l'enregistrement existe
+            if(leaveTypeToDelete == null)
+            {
+                throw new NotFoundException(nameof(LeaveType), request.Id);
+            }
+
 
             await leaveTypeRepository.DeleteAsync(leaveTypeToDelete);
 

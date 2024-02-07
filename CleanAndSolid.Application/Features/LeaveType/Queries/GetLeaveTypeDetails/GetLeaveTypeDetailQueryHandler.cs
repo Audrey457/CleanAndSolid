@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CleanAndSolid.Application.Contracts.Persistance;
+using CleanAndSolid.Application.Exceptions;
 using MediatR;
 
 namespace CleanAndSolid.Application.Features.LeaveType.Queries.GetLeaveTypeDetails
@@ -18,6 +19,8 @@ namespace CleanAndSolid.Application.Features.LeaveType.Queries.GetLeaveTypeDetai
         public async Task<LeaveTypeDetailsDto> Handle(GetLeaveTypeDetailsQuery request, CancellationToken cancellationToken)
         {
             var leaveType = await leaveTypeRepository.GetByIdAsync(request.Id);
+            if (leaveType == null)
+                throw new NotFoundException(nameof(LeaveType), request.Id);
             var data = mapper.Map<LeaveTypeDetailsDto>(leaveType);
             return data;
         }
