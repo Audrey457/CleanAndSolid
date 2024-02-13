@@ -1,6 +1,8 @@
-﻿namespace CleanAndSolid.Application.Contracts.Persistance
+﻿using CleanAndSolid.Domain.Common;
+
+namespace CleanAndSolid.Application.Contracts.Persistance
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : BaseEntity
     {
         Task CreateAsync(T entity);
         Task UpdateAsync(T entity);

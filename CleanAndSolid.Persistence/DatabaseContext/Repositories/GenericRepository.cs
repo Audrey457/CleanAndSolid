@@ -1,9 +1,10 @@
 ﻿using CleanAndSolid.Application.Contracts.Persistance;
+using CleanAndSolid.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAndSolid.Persistence.DatabaseContext.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         //Protected => c'est le repository générique, il faut donc que les classes qui vont en hériter puissent y accéder.
         protected readonly CleanAndSolidDbContext context;
@@ -27,12 +28,13 @@ namespace CleanAndSolid.Persistence.DatabaseContext.Repositories
         public async Task<IReadOnlyList<T>> GetAsync()
         {
             //Set<T> car générique => on ne sait pas quelle entité on cherche.
-            return await context.Set<T>().ToListAsync();
+            //On n'a pas besoin de traquer donc on peut ajouter AsNoTracking pour gagner en performance.
+            return await context.Set<T>().AsNoTracking().ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await context.Set<T>().FindAsync(id);
+            return await context.Set<T>().AsNoTracking().FirstOrDefaultAsync(q => q.Id == id);
         }
 
         public async Task UpdateAsync(T entity)
