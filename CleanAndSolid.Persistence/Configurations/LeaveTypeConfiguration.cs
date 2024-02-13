@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CleanAndSolid.Persistence.DatabaseContext.Configurations
+namespace CleanAndSolid.Persistence.Configurations
 {
     public class LeaveTypeConfiguration : IEntityTypeConfiguration<LeaveType>
     {

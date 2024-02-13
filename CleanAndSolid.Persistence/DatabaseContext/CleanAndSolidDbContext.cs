@@ -1,6 +1,5 @@
 ﻿using CleanAndSolid.Domain;
 using CleanAndSolid.Domain.Common;
-using CleanAndSolid.Persistence.DatabaseContext.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanAndSolid.Persistence.DatabaseContext

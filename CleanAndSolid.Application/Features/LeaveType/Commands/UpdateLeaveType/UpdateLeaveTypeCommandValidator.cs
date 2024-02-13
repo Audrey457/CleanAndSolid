@@ -26,7 +26,7 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.UpdateLeaveType
 
         private Task<bool> LeaveTypeExists(UpdateLeaveTypeCommand command, CancellationToken token)
         {
-            return leaveTypeRepository.Exists(command.Name);
+            return leaveTypeRepository.IsLeaveTypeUnique(command.Name);
         }
     }
 }
