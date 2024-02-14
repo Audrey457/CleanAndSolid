@@ -10,6 +10,12 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.UpdateLeaveType
         public UpdateLeaveTypeCommandValidator(ILeaveTypeRepository leaveTypeRepository)
         {
             this.leaveTypeRepository = leaveTypeRepository;
+
+            RuleFor(q => q.Id)
+                .NotNull()
+                .MustAsync(LeaveTypeMustExist)
+                .WithMessage("Leave type does not exists");
+
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required")
                 .NotNull()
@@ -20,11 +26,17 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.UpdateLeaveType
                 .GreaterThan(1).WithMessage("{PropertyName} cannot be less than 1");
 
             RuleFor(q => q)
-                .MustAsync(LeaveTypeExists)
-                .WithMessage("Leave type does not exists");   
+                .MustAsync(LeaveTypeNameUnique)
+                .WithMessage("Leave type already exists");
         }
 
-        private Task<bool> LeaveTypeExists(UpdateLeaveTypeCommand command, CancellationToken token)
+        private async Task<bool> LeaveTypeMustExist(int id, CancellationToken token)
+        {
+            var leaveType = await leaveTypeRepository.GetByIdAsync(id);
+            return leaveType != null;
+        }
+
+        private Task<bool> LeaveTypeNameUnique(UpdateLeaveTypeCommand command, CancellationToken token)
         {
             return leaveTypeRepository.IsLeaveTypeUnique(command.Name);
         }

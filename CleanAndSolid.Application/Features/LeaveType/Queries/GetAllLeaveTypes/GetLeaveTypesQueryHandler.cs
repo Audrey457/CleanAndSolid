@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CleanAndSolid.Application.Contracts.Logging;
 using CleanAndSolid.Application.Contracts.Persistance;
 using MediatR;
 
@@ -8,11 +9,13 @@ namespace CleanAndSolid.Application.Features.LeaveType.Queries.GetAllLeaveTypes
     {
         private readonly IMapper mapper;
         private readonly ILeaveTypeRepository leaveTypeRepository;
+        private readonly IAppLogger<GetLeaveTypesQueryHandler> logger;
 
-        public GetLeaveTypesQueryHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository)
+        public GetLeaveTypesQueryHandler(IMapper mapper, ILeaveTypeRepository leaveTypeRepository, IAppLogger<GetLeaveTypesQueryHandler> logger)
         {
             this.mapper = mapper;
             this.leaveTypeRepository = leaveTypeRepository;
+            this.logger = logger;
         }
         public async Task<List<LeaveTypeDto>> Handle(GetLeaveTypesQuery request, CancellationToken cancellationToken)
         {
@@ -23,6 +26,7 @@ namespace CleanAndSolid.Application.Features.LeaveType.Queries.GetAllLeaveTypes
             var data = mapper.Map<List<LeaveTypeDto>>(leaveTypes);
 
             //return list of DTO Objet
+            logger.LogInformation("Leave types were retrieved successfully");
             return data;
         }
     }
