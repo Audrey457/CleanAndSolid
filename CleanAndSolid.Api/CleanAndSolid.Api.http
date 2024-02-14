@@ -1,0 +1,6 @@
+@CleanAndSolid.Api_HostAddress = http://localhost:5121
+
+GET {{CleanAndSolid.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
