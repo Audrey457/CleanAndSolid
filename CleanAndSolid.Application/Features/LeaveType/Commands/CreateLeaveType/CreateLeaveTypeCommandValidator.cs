@@ -22,6 +22,7 @@ namespace CleanAndSolid.Application.Features.LeaveType.Commands.CreateLeaveType
             RuleFor(q => q)
                 .MustAsync(LeaveTypeNameUnique)
                 .WithMessage("Leave type already exists");
+            
         }
 
         private Task<bool> LeaveTypeNameUnique(CreateLeaveTypeCommand command, CancellationToken token)

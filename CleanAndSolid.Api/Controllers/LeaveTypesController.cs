@@ -32,32 +32,34 @@ namespace CleanAndSolid.Api.Controllers
 
         // GET api/<LeaveTypesController>/5
         [HttpGet("{id}")]
-        public async Task<LeaveTypeDetailsDto> Get(int id)
+        public async Task<ActionResult<LeaveTypeDetailsDto>> Get(int id)
         {
             var leaveType = await mediator.Send(new GetLeaveTypeDetailsQuery(id));
-            return leaveType;
+            return Ok(leaveType);
         }
 
         // POST api/<LeaveTypesController>
         [HttpPost]
-        public async Task<int> Post([FromBody] LeaveTypeDto leaveType)
+        public async Task<ActionResult> Post(CreateLeaveTypeCommand leaveType)
         {
-            var leaveTypeId = await mediator.Send(new CreateLeaveTypeCommand { Name = leaveType.Name, DefaultDays = leaveType.DefaultDays });
-            return leaveTypeId;
+            var leaveTypeId = await mediator.Send(leaveType);
+            return CreatedAtAction(nameof(Get), new { id = leaveTypeId });
         }
 
         // PUT api/<LeaveTypesController>/5
         [HttpPut("{id}")]
-        public async void Put(int id, [FromBody] LeaveTypeDto leaveType)
+        public async Task<ActionResult> Put([FromBody] UpdateLeaveTypeCommand leaveType)
         {
-            await mediator.Send(new UpdateLeaveTypeCommand { Id = id, Name = leaveType.Name, DefaultDays = leaveType.DefaultDays });
+            await mediator.Send(leaveType);
+            return NoContent();
         }
 
         // DELETE api/<LeaveTypesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            mediator.Send(new DeleteLeaveTypeCommand { Id = id });
+            await mediator.Send(new DeleteLeaveTypeCommand { Id = id }) ;
+            return NoContent();
         }
     }
 }
