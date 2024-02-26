@@ -17,4 +17,8 @@
     <ProjectReference Include="..\CleanAndSolid.Domain\CleanAndSolid.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\LeaveAllocation\Commands\" />
+  </ItemGroup>
+
 </Project>

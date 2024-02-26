@@ -40,6 +40,8 @@ namespace CleanAndSolid.Api.Controllers
 
         // POST api/<LeaveTypesController>
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<ActionResult> Post(CreateLeaveTypeCommand leaveType)
         {
             var leaveTypeId = await mediator.Send(leaveType);
@@ -48,6 +50,9 @@ namespace CleanAndSolid.Api.Controllers
 
         // PUT api/<LeaveTypesController>/5
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Put([FromBody] UpdateLeaveTypeCommand leaveType)
         {
             await mediator.Send(leaveType);
@@ -56,6 +61,9 @@ namespace CleanAndSolid.Api.Controllers
 
         // DELETE api/<LeaveTypesController>/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesDefaultResponseType]
         public async Task<ActionResult> Delete(int id)
         {
             await mediator.Send(new DeleteLeaveTypeCommand { Id = id }) ;
